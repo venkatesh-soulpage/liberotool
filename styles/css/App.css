@@ -1,0 +1,30 @@
+html,
+body,
+#__next {
+  height: 100%;
+  margin: 0;
+}
+
+.cstm-toolbar {
+  left: 25%;
+  right: 25%;
+}
+
+.tempBoard {
+  left: 0;
+  position: absolute;
+}
+.undo,
+.redo,
+.more {
+  width: 25px;
+}
+
+.tool-item {
+  text-transform: capitalize;
+  font-size: smaller;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  cursor: pointer;
+}
