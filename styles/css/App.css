@@ -28,3 +28,26 @@ body,
   align-self: flex-end;
   cursor: pointer;
 }
+.custom-menu{
+  padding: 0.5rem 1rem !important;
+  width: 280px !important;
+
+}
+ .dropdown a {
+  color : #35384D !important;
+
+}
+.dropdown a:hover{
+  text-decoration: none !important;
+}
+
+#text_tool {
+  position: absolute;
+
+  border: 1px dashed black;
+  outline: 0;
+  z-index: 1000 !important;
+  display: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
