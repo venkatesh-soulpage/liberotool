@@ -17,7 +17,7 @@ body,
 .undo,
 .redo,
 .more {
-  width: 25px;
+  width: 20px;
 }
 
 .tool-item {
@@ -50,4 +50,8 @@ body,
   display: none;
   overflow: hidden;
   white-space: nowrap;
+}
+.tab-content>.tab-pane {
+ 
+  position: relative;
 }
