@@ -15,6 +15,15 @@ import {
   fontSize,
   changebgColor,
   socketConnection,
+  addMouse,
+  onCanvasTransfer,
+  onDrawingEvent,
+  onDrawRect,
+  backgroundColor,
+  onDrawLines,
+  onDrawCircle,
+  onDrawEllipse,
+  onTextDraw
 } from "./canvas.js";
 
 var TOOLS = [
@@ -45,9 +54,35 @@ export default function Home() {
   var canvas;
   var context;
   var textarea;
-
+  var channel;
+  
   React.useEffect(() => {
     console.log("effect");
+    handleCanvas();
+   fetchData();
+  }, [state]);
+
+  React.useEffect(() => {
+    handleCanvas();
+    fetchData();
+  }, []);
+
+  function fetchData(){
+    channel=  socketConnection(state);
+    if(channel!=undefined){
+   channel.on("mousemove", addMouse);
+   channel.on("copyCanvas", onCanvasTransfer);
+    channel.on('drawing', onDrawingEvent);
+   channel.on('rectangle', onDrawRect);
+   channel.on("background_color", backgroundColor);
+     channel.on('linedraw', onDrawLines);
+   channel.on('circledraw', onDrawCircle);
+    channel.on('ellipsedraw', onDrawEllipse);
+    channel.on('textdraw', onTextDraw);
+    }
+  }
+ 
+  function handleCanvas(){
     canvaso = document.getElementById(state.active);
     contexto = canvaso.getContext("2d");
     canvas = document.getElementById(`temp-${state.active}`);
@@ -62,12 +97,7 @@ export default function Home() {
     }
     canvas.width = canvaso.width;
     canvas.height = canvaso.height;
-  }, [state]);
-
-  React.useEffect(() => {
-   
-    socketConnection(state);
-  }, []);
+  }
 
   function handleClick(item) {
     item === "more" ? setDropShow(!dropShow) : ToolEvents[item](canvaso, contexto, canvas, context);
@@ -123,7 +153,7 @@ export default function Home() {
               type="color"
               name=""
               placeholder="Color"
-              // value="#47b347"
+           
               id="colour-picker"
               onChange={(e) => handleColor(e)}
             />
@@ -134,7 +164,7 @@ export default function Home() {
               type="color"
               name=""
               placeholder="Color"
-              // value="#47b347"
+         
               id="colour-picker"
               onChange={(e) => handlebgColor(e)}
             />
@@ -168,74 +198,19 @@ export default function Home() {
             );
           })}
 
-          {/* <div className="form-group">
-                <select
-                  className="form-control"
-                  name="size"
-                  id=""
-                  onChange={(e) => handleLineWidth(e)}
-                >
-                  <option>Thickness</option>
-                  <option value={2}>2</option>
-                  <option value={4}>4</option>
-                  <option valu={6}>6</option>
-                </select>
-              </div> */}
+         
           <Dropdown>
             <Dropdown.Toggle as={CustomToggle}>
-              <FontAwesomeIcon icon={faEllipsisV} />
+              <FontAwesomeIcon icon={faEllipsisV} className="ml-2" />
               <span className="d-block mt-2">more</span>
             </Dropdown.Toggle>
 
             <Dropdown.Menu as={CustomMenu} className="custom-menu">
-              {/* <Dropdown.Item>
-              
-
-                <FormControl
-                  autoFocus
-                  type="number"
-                  placeholder="Thickness"
-                  onChange={(e) => handleLineWidth(e)}
-                />
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <label className="pl-3">Color</label>
-                <input
-                  type="color"
-                  name=""
-                  placeholder="Color"
-                  // value="#47b347"
-                  id="colour-picker"
-                  className="ml-2"
-                  onChange={(e) => handleColor(e)}
-                />
-              </Dropdown.Item> */}
+             
             </Dropdown.Menu>
           </Dropdown>
 
-          {/* <div className="bg-white border p-1">
-            <label className="pl-1">Thickness</label>
-            <input
-              type="number"
-              defaultValue="2"
-              className="pl-2"
-              min="2"
-              max="20"
-              onChange={(e) => handleLineWidth(e)}
-            />
-          </div>
-          <div className="bg-white border p-1">
-            <label className="pl-3">Color</label>
-            <input
-              type="color"
-              name=""
-              placeholder="Color"
-              // value="#47b347"
-              id="colour-picker"
-              className="ml-2"
-              onChange={(e) => handleColor(e)}
-            />
-          </div> */}
+        
         </div>
       </div>
 
