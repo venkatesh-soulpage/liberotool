@@ -5,6 +5,8 @@ import { Button, Row, Tab, Tabs, Col, Nav, Dropdown, FormControl, Form } from "r
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
+ 
+
 import $ from "jquery";
 import { Socket } from "phoenix-socket";
 
@@ -82,7 +84,8 @@ export default function Home() {
     }
   }
  
-  function handleCanvas(){
+  function handleCanvas()
+  {
     canvaso = document.getElementById(state.active);
     contexto = canvaso.getContext("2d");
     canvas = document.getElementById(`temp-${state.active}`);
@@ -100,6 +103,7 @@ export default function Home() {
   }
 
   function handleClick(item) {
+    console.log(document.getElementById(state.active))
     item === "more" ? setDropShow(!dropShow) : ToolEvents[item](canvaso, contexto, canvas, context);
   }
 
@@ -231,6 +235,17 @@ export default function Home() {
         onSelect={(k) => setState({ ...state, active: k })}
         className="mt-5"
       >
+        {/* {
+          state.boards.map((item,index)=>(
+            <Tab eventKey={item.name} title={item.name} key={index} className="h-100 w-100">
+                <canvas id={item.name} className="temp"></canvas>
+
+                <canvas id={"temp-" + item.name} className="tempBoard"></canvas>
+              </Tab>
+          )
+
+          )
+        } */}
         {[...Array(state.boards)].map((x, i) =>
           (function () {
             var board = `board-${i + 1}`;
