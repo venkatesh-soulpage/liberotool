@@ -82,6 +82,7 @@ export const ToolEvents = {
     contexto = ctxo;
     canvas = cs;
     context = ctx;
+    
    // Attach the mousedown, mousemove and mouseup event listeners.
     canvas.addEventListener("mousedown", ev_canvas, false);
     // canvas.addEventListener('mousemove', ev_canvas, false);
@@ -141,15 +142,18 @@ export const ToolEvents = {
     tool = this;
     this.started = false;
     this.mousedown = function (ev) {
+      console.log(ev);
       tool.started = true;
       tool.x0 = ev._x;
       tool.y0 = ev._y;
     };
     this.mousemove = function (ev) {
+      console.log(ev._x,tool.x0);
       if (!tool.started) {
         return;
       }
       var pos_x = Math.min(ev._x, tool.x0);
+      console.log(pos_x);
       var pos_y = Math.min(ev._y, tool.y0);
       var pos_w = Math.abs(ev._x - tool.x0);
       var pos_h = Math.abs(ev._y - tool.y0);
@@ -229,7 +233,7 @@ this.mouseup = function (ev) {
     // Attach the mousedown, mousemove and mouseup event listeners.
     canvas.addEventListener("mousedown", ev_canvas, false);
     // canvas.addEventListener('mousemove', ev_canvas, false);
-    // canvas.addEventListener("mousemove", throttle(ev_canvas, 10), false);
+    canvas.addEventListener("mousemove", throttle(ev_canvas, 10), false);
     canvas.addEventListener("mouseup", ev_canvas, false);
      tool = this;
     this.started = false;
@@ -539,19 +543,19 @@ function drawPencil(x0, y0, x1, y1, color, linewidth,state, emit,canvas) {
   }
   var w = canvaso.width;
   var h = canvaso.height;
-  channel.push('drawing', {
-    name: "drawing",
-    room: room,
-    data:{
-    x0: x0 / w,
-    y0: y0 / h,
-    x1: x1 / w,
-    y1: y1 / h,
-    color: colorPicked,
-    lineThickness: lineWidthPicked,
-    board : state.active
- },
-});
+//   channel.push('drawing', {
+//     name: "drawing",
+//     room: room,
+//     data:{
+//     x0: x0 / w,
+//     y0: y0 / h,
+//     x1: x1 / w,
+//     y1: y1 / h,
+//     color: colorPicked,
+//     lineThickness: lineWidthPicked,
+//     board : state.active
+//  },
+// });
 }
 
 //draw ellipse
@@ -702,7 +706,8 @@ export  function onCanvasTransfer(data){
   img_update();
 }
 
-export function onDrawingEvent(data){
+export function onDrawingEvent(data)
+{
   console.log(data);
   var w = canvaso.width;
   var h = canvaso.height;

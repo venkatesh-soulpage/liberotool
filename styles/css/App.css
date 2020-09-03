@@ -28,16 +28,14 @@ body,
   align-self: flex-end;
   cursor: pointer;
 }
-.custom-menu{
+.custom-menu {
   padding: 0.5rem 1rem !important;
   width: 280px !important;
-
 }
- .dropdown a {
-  color : #35384D !important;
-
+.dropdown a {
+  color: #35384d !important;
 }
-.dropdown a:hover{
+.dropdown a:hover {
   text-decoration: none !important;
 }
 
@@ -51,7 +49,36 @@ body,
   overflow: hidden;
   white-space: nowrap;
 }
-.tab-content>.tab-pane {
- 
+.tab-content > .tab-pane {
   position: relative;
+}
+.main-div {
+  overflow-x: hidden;
+}
+.nav-tabs {
+  margin-left: 60px;
+}
+.nav-tabs .nav-link {
+  border: none !important;
+  color : #35384D !important;
+}
+.add-board {
+  padding: 5px 15px !important;
+  background: linear-gradient(154.84deg, #51ba65 -13.67%, #384da1 133.92%) !important;
+  color: #ffff !important;
+  border-radius: 5px !important;
+  font-size: 18px !important;
+  border: none !important;
+
+  position: absolute;
+  /* box-shadow: 0px 1.85378px 1.06592px rgba(81, 186, 101, 0.0180827), 0px 4.31018px 2.47835px rgba(81, 186, 101, 0.0261253), 0px 7.74008px 4.45054px rgba(81, 186, 101, 0.0322036), 0px 12.8457px 7.38625px rgba(81, 186, 101, 0.0377964), 0px 21.1628px 12.1686px rgba(81, 186, 101, 0.0438747), 0px 36.9864px 21.2672px rgba(81, 186, 101, 0.0519173), 0px 80px 46px rgba(81, 186, 101, 0.07); */
+}
+
+.add-board:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.nav-tabs .nav-link.active{
+  font-weight: bold;
+  border-bottom : 4px solid #51ba65!important;
 }
